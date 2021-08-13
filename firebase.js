@@ -8,3 +8,11 @@ const firebaseConfig = {
   messagingSenderId: "713719827227",
   appId: "1:713719827227:web:c9593c09d083eb57c9e1be"
 };
+
+const app = !firebase.apps.length 
+? firebase.initializeApp(firebaseConfig) 
+: firebase.app();
+
+const db = app.firestore();
+
+export default db;
