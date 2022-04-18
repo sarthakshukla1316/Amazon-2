@@ -10,9 +10,20 @@ const MIN_RATING = 1;
 
 function Product({ id, title, price, description, category, image }) {
     const dispatch = useDispatch();
+    const Swal = require('sweetalert2');
 
     const [rating] = useState(Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING);
     const [hasPrime] = useState(Math.random() < 0.5);
+
+    const popShow = () => (
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Item added successfully',
+            showConfirmButton: false,
+            timer: 1000
+          })
+    );
 
     const addItemToBasket = () => {
         const product = {
@@ -21,6 +32,8 @@ function Product({ id, title, price, description, category, image }) {
 
         // Sending  the product as an action to the redux store.... the basket slice
         dispatch(addToBasket(product));
+
+        popShow();
     };
 
     return (

@@ -7,18 +7,41 @@ import { addToBasket, removeFromBasket } from '../slices/basketSlice';
 function CheckoutProduct({ id, title, price, rating, description, category, image, hasPrime}) {
 
     const dispatch = useDispatch();
+    const Swal = require('sweetalert2');
+
+    const popAdded = () => (
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Item added successfully',
+            showConfirmButton: false,
+            timer: 1000
+          })
+    );
+
+    const popRemoved = () => (
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Item removed successfully',
+            showConfirmButton: false,
+            timer: 1000
+          })
+    );
 
     const addItemToBasket = () => {
         // add item to redux
         const product = { id, title, price, rating, description, category, image, hasPrime};
         dispatch(addToBasket(product));
 
+        popAdded();
     }
 
     const removeItemFromBasket = () => {
         // Remove item from redux
         dispatch(removeFromBasket({id}));
 
+        popRemoved();
     }
 
 
